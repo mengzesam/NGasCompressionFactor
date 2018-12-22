@@ -2,33 +2,21 @@
 #include <string>
 
 class AGA892DC{
-public://member method
-   static void calcZRhom(double& Z,double& rhom);
-private://member method
-    static void sortInput();
-    static void calcSecondVirial(double BI[18]);
-    static double calcK();
-    static double calcF();
-    static double calcQ();
-    static double calcG();
-    static double calcU();
-    static double rhom2PZ(double rhom,double tt,double BI[18],double CNS[46],double K,
-                        double F,double Q,double G,double U,double& Z);
-private://inputs component
     //ID:   1	    2	3	4	    5	    6	7	8	9	10	11	    12	    13	    14	    15	    16	    17	1   8	    19	    20	21
     //Comp.:CH4	    N2	CO2	C2H6	C3H8	H2O	H2S	H2	CO	O2	i-C4H10	n-C4H10	i-C5H12	n-C5H12	C6H14	C7H16	C8H18	C9H20	C10H22	He	Ar
-    static int status;//0:not start,1:already input ,2:sorted input;3:already calcB
-    static int NUM_x;//<=21
-    static int ID_raw[21];
-    static int ID[21];
-    static int Index2raw[21];
-    static double xi_raw[21];
-public:
-    static double p;
-    static double t;
-private://output
-    double Z;
-    double rhom;
+public://member method
+   static int calcZRho(double xi_raw[],int ID_raw[],int NUM_x,double p,double t,
+                        double& Z,double& rhom,double& rho);
+private://member method
+    static int checkInputs(double xi_raw[],int ID_raw[],int NUM_x,double p,double t);
+    static void sortInput(double xi_raw[],int ID_raw[],int ID[],int Index2raw[],int NUM_x);
+    static void calcSecondVirial(double xi_raw[],int ID[],int Index2raw[],int NUM_x,double BI[18]);
+    static void calcKFQGU(double xi_raw[],int ID[],int Index2raw[],int NUM_x,
+                          double& K,double& F,double& Q,double& G,double& U);
+    static double rhom2PZ(double rhom,double tt,double BMIX,double CNS[46],double K,
+                        double F,double Q,double G,double U,double& Z);
+private:
+    static int status;
 private://state parameters ref. to B.1 of GB/T 17747.2-2011 (or ISO 12213-2 2006)
     const static int bn[58];
     const static int cn[58];
@@ -258,43 +246,4 @@ const double AGA892DC::K7j[5]={//j:15-19
 const double AGA892DC::E89=1.1;
 const double AGA892DC::E811=1.3;
 const double AGA892DC::E812=1.3;
-
-int AGA892DC::NUM_x=14;
-int AGA892DC::ID_raw[21]={
-    3,
-    2,
-    8,
-    9,
-    1,
-    4,
-    5,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-};
-double AGA892DC::xi_raw[21]={
-    0.016,
-    0.1,
-    0.095,
-    0.01,
-    0.735,
-    0.033,
-    0.0074,
-    0.0012,
-    0.0012,
-    0.0004,
-    0.0004,
-    0.0002,
-    0.0001,
-    0.0001,
-};
-
-int AGA892DC::status=1;
-int AGA892DC::ID[21]={};
-int AGA892DC::Index2raw[21]={};
-double AGA892DC::t=16.85;
-double AGA892DC::p=6.0;
+int AGA892DC::status=0;
