@@ -81,7 +81,7 @@ void AGA892DC::calcZRhom(double& Z,double& rhom){
             for(int j=i+1;j<NUM_x;j++){
                 int jj=ID[j];
                 double xij=xi*xi_raw[Index2raw[j]];
-                if(abs(xij)>1E-8){
+                if(abs(xij)>1E-8 && jj<=19){
                     K+=2.0*xij*(pow(Kij0[ii-1][jj-1],5.0)-1.0)*pow(Ki[ii-1]*Ki[jj-1],2.5);
                     U+=2.0*xij*(pow(Uij0[ii-1][jj-1],5.0)-1.0)*pow(Ei[ii-1]*Ei[jj-1],2.5);
                     G+=xij*(Gij0[ii-1][jj-1]-1.0)*(Gi[ii-1]+Gi[jj-1]);
@@ -117,7 +117,7 @@ void AGA892DC::calcZRhom(double& Z,double& rhom){
     for(int i=12;i<58;i++){
         CNS[i-12]=an[i]*pow(G+1.0-gn[i],gn[i])*pow(Q*Q+1.0-qn[i],qn[i])*pow(F+1.0-fn[i],fn[i])*pow(U,un[i]);   
     }
-    rhom=2.0;//p/(0.91501*(t+273.15)*(8.314510E-3));
+    rhom=2.0;
     double pp=rhom2PZ(rhom,t,BI,CNS,K,F,Q,G,U,Z);
     if(abs(pp-p)>err){
         double rhom0=rhom;
