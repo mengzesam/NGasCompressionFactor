@@ -524,7 +524,7 @@ int AGA892DC::calcZRho(double xi_raw[],int ID_raw[],int NUM_x,double p,double t,
     double M=0.0;
     for(int i=0;i<NUM_x;i++){
         int ii=ID[i];
-        M+=Mi[i]*xi_raw[Index2raw[i]];
+        M+=Mi[ii-1]*xi_raw[Index2raw[i]];
     }
     rho=rhom*M;
     status=100; 
