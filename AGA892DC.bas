@@ -1,12 +1,12 @@
 Attribute VB_Name = "AGA892DC"
-'º¯ÊıÔ­ĞÍ£º
+'å‡½æ•°åŸå‹ï¼š
 'double xipt2Z_AGA(double xi_raw[],int ID_raw[],int NUM_x,double p,double t)
 'double xipt2rhom_AGA(double xi_raw[],int ID_raw[],int NUM_x,double p,double t)
 'double xipt2rhom_AGA(double xi_raw[],int ID_raw[],int NUM_x,double p,double t)
 '
 '/*
 'AGA892DC:
-'    //xi:Ä¦¶û·ÖÊı,p:¾ø¶ÔÑ¹Á¦,MPa,t:ÉãÊÏ¶È£¬C
+'    //xi:æ‘©å°”åˆ†æ•°,p:ç»å¯¹å‹åŠ›,MPa,t:æ‘„æ°åº¦ï¼ŒC
 '    /*
 '    p:0<p<=12MPa
 '    t+273.15:263-338
@@ -43,7 +43,7 @@ Public Declare PtrSafe Function xipt2Z_AGA Lib "NGCompressionFactor.dll" Alias "
 (ByRef xi_raw As Double, ByRef ID_raw As Long, ByVal num_x As Long, ByVal p As Double, ByVal t As Double) As Double
 
 Private Function InputProcess(xi As range, Component As range, xi_raw() As Double, ID_raw() As Long, numx As Long) As Boolean
-    'xi Component±ØĞëÎª1Î¬µÄÁĞ/ĞĞÊı×é
+    'xi Componentå¿…é¡»ä¸º1ç»´çš„åˆ—/è¡Œæ•°ç»„
     Dim Component_raw() As String
     Dim xi0
     Dim Component0
@@ -117,14 +117,14 @@ Private Function InputProcess(xi As range, Component As range, xi_raw() As Doubl
 End Function
 
 Public Function Z_XiPT_AGA(xi As range, Component As range, p As Double, t As Double)
-    'xi ÊäÈëµÄ×é·ÖÄ¦¶û·ÖÊıµÄµ¥Ôª¸ñ·¶Î§£¬±ØĞëÎª1Î¬ÁĞ»òĞĞ
-    ' Component ÊäÈëµÄ×é·ÖÃû³ÆµÄµ¥Ôª¸ñ·¶Î§£¬ĞÎÈçx(CH4)£¬±ØĞëÊÇÓëxi¶ÔÓ¦µÄÁĞ»òĞĞ
-    Dim xi_raw2(21) As Double
-    Dim ID_raw2(21) As Long
+    'xi è¾“å…¥çš„ç»„åˆ†æ‘©å°”åˆ†æ•°çš„å•å…ƒæ ¼èŒƒå›´ï¼Œå¿…é¡»ä¸º1ç»´åˆ—æˆ–è¡Œ
+    ' Component è¾“å…¥çš„ç»„åˆ†åç§°çš„å•å…ƒæ ¼èŒƒå›´ï¼Œå½¢å¦‚x(CH4)ï¼Œå¿…é¡»æ˜¯ä¸xiå¯¹åº”çš„åˆ—æˆ–è¡Œ
+    Dim xi_raw(21) As Double
+    Dim ID_raw(21) As Long
     Dim numx As Long
-    xi_raw2(1) = 0
-    ID_raw2(1) = 0
-    incheck = InputProcess(xi, Component, xi_raw2, ID_raw2, numx)
+    xi_raw(1) = 0
+    ID_raw(1) = 0
+    incheck = InputProcess(xi, Component, xi_raw, ID_raw, numx)
     If (incheck = False) Then
         Z_XiPT_AGA = "errorinput"
         Exit Function
@@ -135,19 +135,19 @@ Public Function Z_XiPT_AGA(xi As range, Component As range, p As Double, t As Do
     Dim strCurDir As String
     Dim tbkDir As String
     Dim tbkDriver As String
-    '±¸·İµ±Ç°Â·¾¶
+    'å¤‡ä»½å½“å‰è·¯å¾„
     strCurDir = CurDir
     strCurDriver = Left(strCurDir, 3)
     tbkDir = ThisWorkbook.Path
     tbkDriver = Left(tbkDir, 3)
-    'ÉèÖÃ¹¤×÷±¡Â·¾¶ÎªĞÂÂ·¾¶
+    'è®¾ç½®å·¥ä½œè–„è·¯å¾„ä¸ºæ–°è·¯å¾„
     ChDrive tbkDriver
     ChDir tbkDir
     
     Z = 0
-    Z = xipt2Z_AGA(xi_raw2(1), ID_raw2(1), numx, p, t)
+    Z = xipt2Z_AGA(xi_raw(1), ID_raw(1), numx, p, t)
     
-    '»Ö¸´Ö®Ç°Â·¾¶
+    'æ¢å¤ä¹‹å‰è·¯å¾„
     ChDrive strCurDriver
     ChDir strCurDir
     Z_XiPT_AGA = Z
