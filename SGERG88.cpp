@@ -109,7 +109,7 @@ int SGERG88::calcIntermediate(double Hs,double d,double xCO2,double xH2,
     Bn=-0.065;
     rhomn=1.0/(Vmnid+Bn);
     HCH=1000.0;
-    double itera0=0;
+    int itera0=0;
     int itera1=0;
     double Hs_v;
     while(1){//outer loop
