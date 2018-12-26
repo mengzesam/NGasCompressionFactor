@@ -1,7 +1,8 @@
-g++ -c *.cpp
+g++ -c -O2 *.cpp
 g++ -shared -o NGCompressionFactor.dll NGCompressionFactor.o AGA892DC.o -Wl,--out-implib,libNGCompressionFactor.a
 or
 g++ -shared -o NGCompressionFactor.dll NGCompressionFactor.o AGA892DC.o -fPIC
+or
+g++ -shared -o NGCompressionFactor.dll *.o -fPIC -Wl,--kill-at 
+        消除dll函数名后的@及数字(如果编译时-m64，64位dll，不许要--kill-at,函数名也不会有@后缀)
 g++ -o a.exe test.o -L./ -lNGCompressionFactor
-
-如要编译64位的dll，须用mingw-64 gcc,编译时增加 -m64,
