@@ -45,10 +45,10 @@ Attribute VB_Name = "NGCompressionFactor"
 'func(ID(1)) will pass ID array for func
 Option Base 1
 
-Public Declare PtrSafe Function xipt2Z_AGA Lib "NGCompressionFactor.dll" Alias "xipt2Z_AGA@28" _
+Public Declare PtrSafe Function xipt2Z_AGA Lib "NGCompressionFactor.dll" _
 (ByRef xi_raw As Double, ByRef ID_raw As Long, ByVal num_x As Long, ByVal p As Double, ByVal t As Double) As Double
 
-Public Declare PtrSafe Function Z_SGERG88 Lib "NGCompressionFactor.dll" Alias "Z_SGERG88@48" _
+Public Declare PtrSafe Function Z_SGERG88 Lib "NGCompressionFactor.dll" _
 (ByVal p As Double, ByVal t As Double, ByVal Hs As Double, ByVal d As Double, ByVal xCO2 As Double, ByVal xH2 As Double) As Double
 
 Private Function InputProcess(xi As range, Component As range, xi_raw() As Double, ID_raw() As Long, numx As Long) As Boolean
