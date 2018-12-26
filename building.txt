@@ -3,3 +3,5 @@ g++ -shared -o NGCompressionFactor.dll NGCompressionFactor.o AGA892DC.o -Wl,--ou
 or
 g++ -shared -o NGCompressionFactor.dll NGCompressionFactor.o AGA892DC.o -fPIC
 g++ -o a.exe test.o -L./ -lNGCompressionFactor
+
+如要编译64位的dll，须用mingw-64 gcc,编译时增加 -m64,
