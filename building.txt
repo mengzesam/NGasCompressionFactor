@@ -6,3 +6,7 @@ or
 g++ -shared -o NGCompressionFactor.dll *.o -fPIC -Wl,--kill-at 
         消除dll函数名后的@及数字(如果编译时-m64，64位dll，不许要--kill-at,函数名也不会有@后缀)
 g++ -o a.exe test.o -L./ -lNGCompressionFactor
+
+
+直接用记事本或者notepad++打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到PE两个字母，在其后的不远出会出现d? 或者L。
+若是d，则证明该程序是64位；若是L，则证明是32位。
