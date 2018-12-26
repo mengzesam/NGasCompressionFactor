@@ -1,6 +1,5 @@
 #define BUILDING_DLL
 
-#include "AGA892DC.h"
 #include "NGCompressionFactor.h"
 #include <windows.h>
 
@@ -60,6 +59,33 @@ DLL_PUBLIC  double xipt2rho_AGA(double xi_raw[],int ID_raw[],int NUM_x,double p,
     else 
         return -999999.0;
 }
+
+DLL_PUBLIC  double Z_SGERG88(double p,double t,double Hs,double d,double xCO2,double xH2){
+    double Z,rhom,rho;
+    int ret=SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
+    if(ret==0)
+        return Z;
+    else 
+        return -999999.0;
+}
+DLL_PUBLIC  double Rhom_SGERG88(double p,double t,double Hs,double d,double xCO2,double xH2){
+    double Z,rhom,rho;
+    int ret=SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
+    if(ret==0)
+        return rhom;
+    else 
+        return -999999.0;
+}
+DLL_PUBLIC  double Rho_SGERG88(double p,double t,double Hs,double d,double xCO2,double xH2){
+    double Z,rhom,rho;
+    int ret=SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
+    if(ret==0)
+        return rho;
+    else 
+        return -999999.0;
+}
+
+
 
 BOOL APIENTRY DllMain( HANDLE hModule, DWORD fdwReason, LPVOID lpReserved)
 {

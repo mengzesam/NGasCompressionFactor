@@ -1,11 +1,10 @@
 #undef BUILDING_DLL
-#include "AGA892DC.h"
 #include "NGCompressionFactor.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-int main(int argc, char const *argv[])
+/* int main(int argc, char const *argv[])
 {
     double rhom,rho,Z;
     double p=6.0;
@@ -50,5 +49,20 @@ int main(int argc, char const *argv[])
     t=56.85;
     Z=xipt2Z_AGA(xi_raw,ID_raw,NUM_x,p,t);
     cout<<setprecision(10)<<Z<<endl;
+    return 0;
+} */
+
+
+
+int main(){
+    double xCO2,xH2,d,Hs,p,t;
+    double Z,rho,rhom;
+    xCO2=0.006;
+    xH2=0.0;
+    d=0.581;
+    Hs=40.66;
+    p=6;
+    t=-3.15;
+    Z=Z_SGERG88(p,t,Hs,d,xCO2,xH2);
     return 0;
 }

@@ -257,24 +257,3 @@ int SGERG88::ZRho_SGERG88(double p,double t,double Hs,double d,double xCO2,doubl
     rho=d*Rhonair*p*Zn*Tn/(pn*Z*T);//output:rho    
     return 0;//calculation success
 }
-
-int main(){
-    double xCO2,xH2,d,Hs,p,t;
-    double Z,rho,rhom;
-    xCO2=0.006;
-    xH2=0.0;
-    d=0.581;
-    Hs=40.66;
-    p=6;
-    t=-3.15;
-    SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
-    t=6.85;
-    SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
-    t=16.85;
-    SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
-    t=36.85;
-    SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
-    t=56.85;
-    SGERG88::ZRho_SGERG88(p,t,Hs,d,xCO2,xH2,Z,rhom,rho);
-    return 0;
-}
