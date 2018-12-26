@@ -233,7 +233,7 @@ int AGA892DC::checkInputs(double xi_raw[],int ID_raw[],int NUM_x,double p,double
         if(ii==1 && xi_raw[i]<0.7) return -ii;//CH4<0.7,超下限 
         sum_0+=xi_raw[i];
     }
-    if(abs(sum_0-1.0)>0.0001)
+    if(abs(sum_0-1.0)>0.000101)
         return 0;//所有组分摩尔分数之和必须1+-0.0001
     return 1;
 }
